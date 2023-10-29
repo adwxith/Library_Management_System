@@ -83,9 +83,9 @@ python app.py
 
 You can customize the front-end of the system by modifying the HTML and CSS files in the `templates` and `static` directories, respectively. Feel free to style and structure the system according to your preferences.
 
-## Adwaith Sajeev C
+## Author
 
-[Your Name]
+Adwaith Sajeev C
 
 ## License
 
