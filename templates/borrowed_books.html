@@ -1,0 +1,34 @@
+<!-- borrowed_books.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Borrowed Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Borrowed Books List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Book Title</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrowed_book in borrowed_books %}
+            <tr>
+                <td>{{ borrowed_book[0] }}</td>
+                <td>{{ borrowed_book[1] }}</td>
+                <td>{{ borrowed_book[2] }}</td>
+                <td>{{ borrowed_book[3] }}</td>
+                <td>{{ borrowed_book[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('index') }}" class="action-button">Back to Home</a>
+</body>
+</html>

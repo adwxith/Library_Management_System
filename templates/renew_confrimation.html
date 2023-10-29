@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Renewal Confirmation</title>
+</head>
+<body>
+    <h1>Renewal Confirmation</h1>
+    <p>The book has been successfully renewed for an additional week.</p>
+    <p>New Return Date: {{ extended_date.strftime('%Y-%m-%d') }}</p>
+    <p>Borrow ID: {{ borrow_id }}</p>
+    <a href="{{ url_for('renew') }}" class="action-button">Back to Renew Books</a>
+</body>
+</html>

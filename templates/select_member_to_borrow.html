@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Member to Borrow</title>
+</head>
+<body>
+    <h1>Select Member to Borrow</h1>
+    <form method="POST">
+        <label for="member_id">Select Member:</label>
+        <select name="member_id" required>
+            {% for member in members %}
+            <option value="{{ member[0] }}">{{ member[1] }} {{ member[2] }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="book_id">Select Book:</label>
+        <select name="book_id" required>
+            {% for book in books %}
+            <option value="{{ book[0] }}">{{ book[1] }}</option>
+            {% endfor %}
+        </select><br>
+        
+        
+        <button type="submit">Next</button>
+    </form>
+    
+    
+
+    <a href="{{ url_for('index') }}" class="action-button">Back to Home</a>
+</body>
+</html>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form select,
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        form select:focus,
+        form button:focus {
+            border-color: #007bff;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3;
+        }
+    
+</style>

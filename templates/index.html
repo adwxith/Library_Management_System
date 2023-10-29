@@ -1,0 +1,74 @@
+<!-- index.html -->
+<h1>Welcome to the Library Management System</h1>
+<div class="button-container">
+    <a href="{{ url_for('members') }}" class="action-button">View Members</a>
+    <a href="{{ url_for('books') }}" class="action-button">View Books</a>
+    <a href="{{ url_for('borrow') }}" class="action-button">Borrow Books</a>
+    <a href="{{ url_for('return_books') }}" class="action-button">Return Books</a>
+    <a href="{{ url_for('renew') }}" class="action-button">Renew Books</a>
+    <!-- Add the Borrowed Books button here -->
+    <a href="{{ url_for('borrowed_books') }}" class="action-button">Borrowed Books</a>
+</div>
+
+<!-- style.css -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .action-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Additional styles for table (you can adjust as needed) */
+    .table-container {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #444; /* Change this to your desired dark grey color */
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>

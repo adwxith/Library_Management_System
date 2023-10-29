@@ -1,0 +1,12 @@
+<!-- return_books.html -->
+<h1>Return Books for {{ member_id }}</h1>
+<form method="POST" action="{{ url_for('process_return', member_id=member_id) }}">
+    <label for="book_id">Select Book:</label>
+    <select name="book_id" required>
+        {% for borrowed_book in borrowed_books %}
+        <option value="{{ borrowed_book.borrow_id }}">{{ borrowed_book.title }}</option>
+        {% endfor %}
+    </select><br>
+    <button type="submit">Return Book</button>
+</form>
+<a href="{{ url_for('return_book') }}" class="action-button">Back</a>

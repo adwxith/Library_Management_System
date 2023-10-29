@@ -1,0 +1,24 @@
+<!-- select_member_to_borrow.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management System - Borrow Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Select Member to Borrow</h1>
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="member_id">Select Member:</label>
+        <select name="member_id" required>
+            {% for member in members %}
+            <option value="{{ member[0] }}">{{ member[1] }} {{ member[2] }}</option>
+            {% endfor %}
+        </select><br>
+        <button type="submit">Next</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="action-button">Back to Home</a>
+</body>
+</html>
