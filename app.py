@@ -32,7 +32,7 @@ def get_db():
 def index():
     return render_template('index.html')
 
-# ... (previous imports and code) ...
+
 
 @app.route('/members')
 def members():
@@ -45,7 +45,7 @@ def members():
 
 
 
-# ... (previous imports and code) ...
+
 
 
 
@@ -74,7 +74,6 @@ def delete_member(member_id):
     db.commit()
     return redirect(url_for('members'))
 
-# ... (previous imports and code) ...
 
 @app.route('/books')
 def books():
@@ -135,16 +134,16 @@ def renew():
             return_date = borrowed_book[4]  # Assuming return_date is at index 4
             new_return_date = return_date + timedelta(days=7)  # Extend by 1 week
             cursor.execute('UPDATE BorrowedBooks SET return_date = %s WHERE borrow_id = %s', (new_return_date, borrow_id))
-            cursor.close()  # Close the cursor
+            cursor.close() 
             db = get_db()
             db.commit()
-            db.close()  # Close the database connection
+            db.close() 
             
             return render_template('renew_confirmation.html', borrow_id=borrow_id)
 
         else:
             error_message = "Invalid borrow ID."
-            cursor.close()  # Close the cursor
+            cursor.close() 
             return render_template('renew_member.html', error_message=error_message)
 
     cursor = get_db().cursor()
@@ -152,7 +151,7 @@ def renew():
     borrowed_books = cursor.fetchall()
     cursor.execute('SELECT member_id, first_name, last_name FROM Members')
     members = cursor.fetchall()
-    cursor.close()  # Close the cursor
+    cursor.close() 
     
     return render_template('renew_member.html', members=members, borrowed_books=borrowed_books)
 
@@ -166,18 +165,18 @@ def return_books():
         db = get_db()
         cursor = db.cursor(dictionary=True)
 
-        # Get the book's information before deleting the borrow record
+        
         cursor.execute('SELECT Books.book_id, Books.total_copies FROM Books JOIN BorrowedBooks ON Books.book_id = BorrowedBooks.book_id WHERE BorrowedBooks.borrow_id = %s', (book_id,))
         book_info = cursor.fetchone()
 
         if book_info:
-            # Update book availability
+           
             cursor.execute('UPDATE Books SET available_copies = available_copies + 1 WHERE book_id = %s', (book_info['book_id'],))
 
-            # Delete the borrow record for the specific book and member
+          
             cursor.execute('DELETE FROM BorrowedBooks WHERE borrow_id = %s', (book_id,))
 
-            # Update the total copies count since the book has been returned
+           
             cursor.execute('UPDATE Books SET total_copies = total_copies + 1 WHERE book_id = %s', (book_info['book_id'],))
 
             db.commit()
@@ -187,8 +186,7 @@ def return_books():
 
             return redirect(url_for('index'))
 
-    # This part handles GET requests to the /return_books route (displaying the form)
-    # Fetch members and borrowed books for dropdowns
+   
     db = get_db()
     cursor = db.cursor(dictionary=True)
     cursor.execute('SELECT DISTINCT Members.member_id, first_name, last_name FROM Members JOIN BorrowedBooks ON Members.member_id = BorrowedBooks.member_id')
@@ -226,18 +224,16 @@ def borrow():
         member_id = request.form['member_id']
         book_id = request.form['book_id']
 
-        db = get_db()  # Get the database connection
-        cursor = db.cursor()  # Create a cursor object
+        db = get_db() 
+        cursor = db.cursor() 
         cursor.execute('SELECT * FROM Books WHERE book_id = %s', (book_id,))
         book = cursor.fetchone()
 
-        if book and book[6] > 0:  # Check available_copies column index
-            # Update book availability
+        if book and book[6] > 0:  
+           
             cursor.execute('UPDATE Books SET available_copies = available_copies - 1 WHERE book_id = %s', (book_id,))
-            
-            # Insert borrow record
             borrow_date = date.today()
-            return_date = borrow_date + timedelta(days=14)  # Example: Borrow for 2 weeks
+            return_date = borrow_date + timedelta(days=14) 
             cursor.execute('INSERT INTO BorrowedBooks (member_id, book_id, borrow_date, return_date) VALUES (%s, %s, %s, %s)',
                            (member_id, book_id, borrow_date, return_date))
             
@@ -251,7 +247,7 @@ def borrow():
             books = cursor.execute('SELECT book_id, title FROM Books WHERE available_copies > 0')
             return render_template('select_member_to_borrow.html', error_message=error_message, members=members, books=books)
 
-    # Fetch members and available books for dropdowns
+    
     db = get_db()
     cursor = db.cursor()
     cursor.execute('SELECT member_id, first_name, last_name FROM Members')
